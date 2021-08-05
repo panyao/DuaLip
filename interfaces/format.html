@@ -80,17 +80,21 @@
             
               <p class="caption"><span class="caption-text">User Documentation</span></p>
 <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="../solver/index.html">The Dualip Solver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../solver/index.html">The DuaLip Solver</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../get_started/index.html">Getting Started</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">Interfaces</a><ul class="current">
-<li class="toctree-l2 current"><a class="current reference internal" href="#">Input Format</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Input Format</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#vector-b">Vector b</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#matrix-a-c">Matrix A &amp; c</a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="parameters.html">Parameters</a></li>
 <li class="toctree-l2"><a class="reference internal" href="logging.html">Logging</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../demo/index.html">Demo</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../citing/index.html">Citing Dualip</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../contributing/index.html">Contributions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../citing/index.html">Citing DuaLip</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contributing/index.html">Contributing</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../acknowledgement/index.html">Acknowledgements</a></li>
 </ul>
 
@@ -161,6 +165,8 @@
   <div class="section" id="input-format">
 <h1>Input Format<a class="headerlink" href="#input-format" title="Permalink to this headline">¶</a></h1>
 <p>Users are expected to provide the A, b, and c of the LP formulation to the solver. The solver takes input in the following format:</p>
+<div class="section" id="vector-b">
+<h2>Vector b<a class="headerlink" href="#vector-b" title="Permalink to this headline">¶</a></h2>
 <p>For vector b, the input should contain the budget for each item. The representation needs to be dense: every item needs to have a budget.
 For input in AVRO, the schema should be as follows:</p>
 <div class="code json highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
@@ -172,7 +178,10 @@ For input in AVRO, the schema should be as follows:</p>
  <span class="p">}</span>
 </pre></div>
 </div>
-<p>For matrix A and vector c, if it is a MOO problem, we take a dense representation.</p>
+</div>
+<div class="section" id="matrix-a-c">
+<h2>Matrix A &amp; c<a class="headerlink" href="#matrix-a-c" title="Permalink to this headline">¶</a></h2>
+<p>If it is a MOO problem, we take a dense representation.</p>
 <ul class="simple">
 <li>id is a unique identifier of the block.</li>
 <li>a contains the dense constraints matrix A(row)(column).</li>
@@ -201,7 +210,7 @@ For input in AVRO, the schema should be as follows:</p>
 </pre></div>
 </div>
 <p>If it is a Matching problem, we take a sparse representation. We keep the items in A and c which belong to same block together, to facilitate projection.</p>
-<p>id is a unique identifier of the block, i.e. impression id for some problems. Each id correspond to an array of tuples, which is in the format of
+<p>id is a unique identifier of the block, i.e. impression id for some problems. Each id corresponds to an array of tuples, which is in the format of
 (rowId, c(rowId), a(rowId)).</p>
 <div class="code json highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
     <span class="s2">&quot;name&quot;</span> <span class="p">:</span> <span class="s2">&quot;id&quot;</span><span class="p">,</span>
@@ -227,6 +236,7 @@ For input in AVRO, the schema should be as follows:</p>
     <span class="p">}</span> <span class="p">]</span>
   <span class="p">}</span>
 </pre></div>
+</div>
 </div>
 </div>
 

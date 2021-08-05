@@ -80,7 +80,7 @@
             
               <p class="caption"><span class="caption-text">User Documentation</span></p>
 <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="../solver/index.html">The Dualip Solver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../solver/index.html">The DuaLip Solver</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../get_started/index.html">Getting Started</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../interfaces/index.html">Interfaces</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">Demo</a><ul class="current">
@@ -101,8 +101,8 @@
 <li class="toctree-l2"><a class="reference internal" href="matching.html">A Matching Problem</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../citing/index.html">Citing Dualip</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../contributing/index.html">Contributions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../citing/index.html">Citing DuaLip</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contributing/index.html">Contributing</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../acknowledgement/index.html">Acknowledgements</a></li>
 </ul>
 
@@ -172,25 +172,25 @@
             
   <div class="section" id="a-multi-objective-optimization-problem">
 <h1>A Multi-Objective Optimization Problem<a class="headerlink" href="#a-multi-objective-optimization-problem" title="Permalink to this headline">¶</a></h1>
-<p>Multi-objective optimization problems (MOO) are optimization problems where more than one objective function needs to be optimized simultaneously. MOO appears frequently in machine learning and web applications where trade-offs between conflicting objective are needed. For example, balancing multiple business metrics in a ranking or recommendation system. MOO can be framed by considering one of the objectives as primary and others as constraints.</p>
+<p>Multi-objective optimization problems (MOO) are optimization problems where more than one objective function needs to be optimized simultaneously. MOO appears frequently in machine learning and web applications where trade-offs between conflicting objectives are needed. For example, balancing multiple business metrics in a ranking or recommendation system. MOO can be framed by considering one of the objectives as primary and others as constraints.</p>
 <div class="section" id="an-example-problem">
 <h2>An example problem<a class="headerlink" href="#an-example-problem" title="Permalink to this headline">¶</a></h2>
 <p>We consider <a class="reference external" href="https://www.kdd.org/kdd2016/papers/files/adf0710-guptaA.pdf">volume optimization</a> as an example to demonstrate how to solve a Multi-Objective Optimization Problem.
 A core problem in any internet industry is to send out emails and notifications to the users,
 either for marketing purposes, for gaining user attention, or to bring users back to the platform. They help in the
-quick distribution of information, but too many emails or notifications are not preferable as they may lead bad user
+quick distribution of information, but too many emails or notifications are not preferable as they may lead to bad user
 experience.</p>
-<p>The problem to be solved can be stated as: given a set of email/notificaiton, find a strategy of sending/dropping to maximize the overall session,
+<p>The problem to be solved can be stated as: given a set of emails/notificaitons, find a strategy of sending/dropping to maximize the overall session,
 such that the total number of emails or notifications that are sent is bounded, the overall click rate is above a threshold and the total disable rate is bounded as well.</p>
 </div>
 <div class="section" id="how-to-translate-the-problem-mathematically">
 <h2>How to translate the problem mathematically?<a class="headerlink" href="#how-to-translate-the-problem-mathematically" title="Permalink to this headline">¶</a></h2>
 <p>To translate this problem mathematically, let us begin with some notations. Define</p>
 <ul class="simple">
-<li><span class="math notranslate nohighlight">\(x_{ik}\)</span>: Probability of sending the j-th email or notification to the i-th user.</li>
-<li><span class="math notranslate nohighlight">\(c_{ik}\)</span>: Probability of user visit the site if this email/notification is sent.</li>
-<li><span class="math notranslate nohighlight">\(p_{ik}\)</span>: Probability of user click this email/notification.</li>
-<li><span class="math notranslate nohighlight">\(r_{ik}\)</span>: Probability of user disable/unsubscribe this email/notification.</li>
+<li><span class="math notranslate nohighlight">\(x_{ik}\)</span>: Probability of sending the k-th email or notification to the i-th user.</li>
+<li><span class="math notranslate nohighlight">\(c_{ik}\)</span>: Probability of i-th user visits the site if k-th email/notification is sent.</li>
+<li><span class="math notranslate nohighlight">\(p_{ik}\)</span>: Probability of i-th user clicks k-th email/notification.</li>
+<li><span class="math notranslate nohighlight">\(r_{ik}\)</span>: Probability of i-th user disables/unsubscribes k-th email/notification.</li>
 </ul>
 <p>The optimization problem can be written as:</p>
 <div class="math notranslate nohighlight">
@@ -219,7 +219,7 @@ such that the total number of emails or notifications that are sent is bounded, 
 <li><p class="first">The objective vector <span class="math notranslate nohighlight">\(c\)</span> is vectorized version of <span class="math notranslate nohighlight">\(c_{ik}\)</span>.</p>
 </li>
 </ol>
-<p>By changing the maximization to a minimization problem, this now become the standard LP format:</p>
+<p>By changing the maximization to a minimization problem, this now becomes the standard LP format:</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}\begin{array}{ll}
   \mbox{Minimize} &amp; - x^T c \\
@@ -318,7 +318,6 @@ The solver takes ACBlock and vectorB as two inputs. We require the input to be i
       --driver.projectionType simplex \
       --input.ACblocksPath data/moo/data.json \
       --input.vectorBPath data/moo/budget.json \
-      --input.metadataPath data/moo/metaData \
       --input.format json \
       --optimizer.solverType LBFGSB \
       --optimizer.dualTolerance 1E-8 \

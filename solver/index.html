@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>The Dualip Solver &mdash; DuaLip 0.0.1 documentation</title>
+  <title>The DuaLip Solver &mdash; DuaLip 0.0.1 documentation</title>
   
 
   
@@ -29,7 +29,7 @@
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Getting Started" href="../get_started/index.html" />
-    <link rel="prev" title="Dualip: Dual Decomposition based Linear Program Solver Documentation" href="../index.html" /> 
+    <link rel="prev" title="DuaLip: Dual Decomposition based Linear Program Solver Documentation" href="../index.html" /> 
 
   
   <script src="../_static/js/modernizr.min.js"></script>
@@ -80,7 +80,7 @@
             
               <p class="caption"><span class="caption-text">User Documentation</span></p>
 <ul class="current">
-<li class="toctree-l1 current"><a class="current reference internal" href="#">The Dualip Solver</a><ul>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">The DuaLip Solver</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#problem-statement">Problem Statement</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#problem-solution">Problem Solution</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#the-algorithm">The Algorithm</a><ul>
@@ -95,8 +95,8 @@
 <li class="toctree-l1"><a class="reference internal" href="../get_started/index.html">Getting Started</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../interfaces/index.html">Interfaces</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../demo/index.html">Demo</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../citing/index.html">Citing Dualip</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../contributing/index.html">Contributions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../citing/index.html">Citing DuaLip</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contributing/index.html">Contributing</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../acknowledgement/index.html">Acknowledgements</a></li>
 </ul>
 
@@ -143,7 +143,7 @@
     
       <li><a href="../index.html">Docs</a> &raquo;</li>
         
-      <li>The Dualip Solver</li>
+      <li>The DuaLip Solver</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -163,35 +163,35 @@
            <div itemprop="articleBody">
             
   <div class="section" id="the-dualip-solver">
-<span id="solver"></span><h1>The Dualip Solver<a class="headerlink" href="#the-dualip-solver" title="Permalink to this headline">¶</a></h1>
+<span id="solver"></span><h1>The DuaLip Solver<a class="headerlink" href="#the-dualip-solver" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="problem-statement">
 <h2>Problem Statement<a class="headerlink" href="#problem-statement" title="Permalink to this headline">¶</a></h2>
 <p>In a typical recommender system problem, we denote users by <span class="math notranslate nohighlight">\(i = 1, \ldots ,I\)</span> and items by <span class="math notranslate nohighlight">\(k = 1, \ldots, K\)</span>. Let
 <span class="math notranslate nohighlight">\(x_{ik}\)</span> denote any association between user <span class="math notranslate nohighlight">\(i\)</span> and item <span class="math notranslate nohighlight">\(k\)</span>, and be the variable of interest. For example,
 <span class="math notranslate nohighlight">\(x_{ik}\)</span> can be the probability of displaying item <span class="math notranslate nohighlight">\(k\)</span> to user <span class="math notranslate nohighlight">\(i\)</span>. The vectorized version is denoted by
 <span class="math notranslate nohighlight">\(x = (x_1, ..., x_I)\)</span> where <span class="math notranslate nohighlight">\(x_i = (x_{i1}, ..., x_{iK})\)</span>.</p>
-<p>Dualip solves Linear Programs (LPs) of the following form:</p>
+<p>DuaLip solves Linear Programs (LPs) of the following form:</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}\begin{array}{ll}
   \mbox{minimize} &amp; c^T x \\
   \mbox{subject to} &amp; A x \leq b \\
   &amp; x_i \in \mathcal{C}_i \;\; \text{for all}\; = 1,\ldots, I
 \end{array}\end{split}\]</div>
-<p>where <span class="math notranslate nohighlight">\(A_{m \times n}\)</span> is the constraint matrix, <span class="math notranslate nohighlight">\(b_{m \times 1}\)</span> is the constraint vector and the <span class="math notranslate nohighlight">\(\mathcal{C}_i\)</span> are uniformly
+<p>where <span class="math notranslate nohighlight">\(A_{m \times n}\)</span> is the constraint matrix, <span class="math notranslate nohighlight">\(b_{m \times 1}\)</span> is the constraint vector and <span class="math notranslate nohighlight">\(\mathcal{C}_i\)</span> are uniformly
 compact polytopes. <span class="math notranslate nohighlight">\(x \in \mathbb{R}^n\)</span> is the vector of optimization variables, where <span class="math notranslate nohighlight">\(n = IK\)</span>.</p>
 </div>
 <div class="section" id="problem-solution">
 <span id="probsolution"></span><h2>Problem Solution<a class="headerlink" href="#problem-solution" title="Permalink to this headline">¶</a></h2>
-<p>We briefly outline the solution mechanism here. For more details please see <a class="reference external" href="http://proceedings.mlr.press/v119/basu20a/basu20a.pdf">Basu et. al (2020)</a>.
-To solve the problem we introduce the perturbed problem</p>
+<p>We briefly outline the solution mechanism here. For more details, please see <a class="reference external" href="http://proceedings.mlr.press/v119/basu20a/basu20a.pdf">Basu et. al (2020)</a>.
+To solve the problem, we introduce the perturbed problem:</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}\begin{array}{ll}
   \mbox{minimize} &amp; x^T c  + \frac{\gamma}{2}x^T x \\
   \mbox{subject to} &amp; A x \leq b \\
   &amp; x_i \in \mathcal{C}_i \;\; \text{for all}\; = 1,\ldots, I
 \end{array}\end{split}\]</div>
-<p>where <span class="math notranslate nohighlight">\(\gamma &gt; 0\)</span> controls the tradeoff of between problem approximation and the smoothness of the dual objective function.
-To make the above problem amenable to first order methods, we consider the Lagrangian dual,</p>
+<p>where <span class="math notranslate nohighlight">\(\gamma &gt; 0\)</span> controls the tradeoff between problem approximation and the smoothness of the dual objective function.
+To make the above problem amenable to first order methods, we consider the Lagrangian dual:</p>
 <div class="math notranslate nohighlight">
 \[g_{\gamma}(\lambda) = \min_{x \in \mathcal C} ~~ \left\{ c^T x + \frac{\gamma}{2} x^T x + \lambda^T(Ax-b) \right\},\]</div>
 <p>where <span class="math notranslate nohighlight">\(\mathcal{C} = \Pi_{i=1}^I \mathcal{C}_i\)</span>. Now, by strong duality, the optimum objective <span class="math notranslate nohighlight">\(g_{\gamma}^*\)</span> of the dual</p>
@@ -211,7 +211,7 @@ gradient is Lipschitz continuous. Moreover, by Danskin's Theorem the gradient ca
 parts of <span class="math notranslate nohighlight">\(A\)</span> and <span class="math notranslate nohighlight">\(c\)</span> corresponding to <span class="math notranslate nohighlight">\(x_i\)</span>. Based on this we use a first-order gradient method as the main optimizer to
 solve the problem. It can also be shown that the solution obeys certain bounds to the true solution <span class="math notranslate nohighlight">\(g_0(\lambda)\)</span> and
 in fact the exact solution of the LP can be obtained if <span class="math notranslate nohighlight">\(\gamma\)</span> is small enough.
-For more details, we refer to <a class="reference external" href="http://proceedings.mlr.press/v119/basu20a/basu20a.pdf">Basu et. al (2020)</a>.</p>
+For more details, please refer to <a class="reference external" href="http://proceedings.mlr.press/v119/basu20a/basu20a.pdf">Basu et. al (2020)</a>.</p>
 </div>
 <div class="section" id="the-algorithm">
 <span id="algorithm"></span><h2>The Algorithm<a class="headerlink" href="#the-algorithm" title="Permalink to this headline">¶</a></h2>
@@ -267,7 +267,7 @@ total opportunity <span class="math notranslate nohighlight">\((g_0(\lambda_0) -
 </div>
 <div class="section" id="infeasible-problems">
 <h2>Infeasible problems<a class="headerlink" href="#infeasible-problems" title="Permalink to this headline">¶</a></h2>
-<p>Dualip is able to detect if the problem is primal infeasible. If the primal problem is infeasible,</p>
+<p>DuaLip is able to detect if the problem is primal infeasible. If the primal problem is infeasible,</p>
 <div class="math notranslate nohighlight">
 \[g_\gamma^* = \max_{\lambda\ge 0} g_\gamma(\lambda) = \infty.\]</div>
 <p>Furthermore, for any feasible <span class="math notranslate nohighlight">\(x\)</span>, by weak duality, we have</p>
@@ -293,7 +293,7 @@ Thus, if, during the optimization, <span class="math notranslate nohighlight">\(
         <a href="../get_started/index.html" class="btn btn-neutral float-right" title="Getting Started" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="../index.html" class="btn btn-neutral" title="Dualip: Dual Decomposition based Linear Program Solver Documentation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="../index.html" class="btn btn-neutral" title="DuaLip: Dual Decomposition based Linear Program Solver Documentation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   

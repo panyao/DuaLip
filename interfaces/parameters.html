@@ -80,7 +80,7 @@
             
               <p class="caption"><span class="caption-text">User Documentation</span></p>
 <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="../solver/index.html">The Dualip Solver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../solver/index.html">The DuaLip Solver</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../get_started/index.html">Getting Started</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">Interfaces</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="format.html">Input Format</a></li>
@@ -93,8 +93,8 @@
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../demo/index.html">Demo</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../citing/index.html">Citing Dualip</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../contributing/index.html">Contributions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../citing/index.html">Citing DuaLip</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contributing/index.html">Contributing</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../acknowledgement/index.html">Acknowledgements</a></li>
 </ul>
 
@@ -230,34 +230,29 @@
 <tr class="row-odd"><td><code class="code docutils literal notranslate"><span class="pre">input.vectorBPath</span></code></td>
 <td>true</td>
 <td>N/A</td>
-<td>Path of vector of budgets b</td>
+<td>Path of vector b</td>
 </tr>
-<tr class="row-even"><td><code class="code docutils literal notranslate"><span class="pre">input.metadataPath</span></code></td>
+<tr class="row-even"><td><code class="code docutils literal notranslate"><span class="pre">input.format</span></code></td>
 <td>true</td>
 <td>N/A</td>
-<td>Path for the metadata of the problem</td>
+<td>The format of input data, e.g. AVRO, JSON, CSV or ORC</td>
 </tr>
-<tr class="row-odd"><td><code class="code docutils literal notranslate"><span class="pre">input.format</span></code></td>
-<td>true</td>
-<td>N/A</td>
-<td>The format of input data, e.g. AVRO, JSON or ORC</td>
-</tr>
-<tr class="row-even"><td><code class="code docutils literal notranslate"><span class="pre">optimizer.maxIter</span></code></td>
+<tr class="row-odd"><td><code class="code docutils literal notranslate"><span class="pre">optimizer.maxIter</span></code></td>
 <td>true</td>
 <td>N/A</td>
 <td>The maximum number of iterations the solver will run</td>
 </tr>
-<tr class="row-odd"><td><code class="code docutils literal notranslate"><span class="pre">optimizer.solverType</span></code></td>
+<tr class="row-even"><td><code class="code docutils literal notranslate"><span class="pre">optimizer.solverType</span></code></td>
 <td>true</td>
 <td>N/A</td>
 <td>The type of optimizer, currently supported: AGD, LBFGSB</td>
 </tr>
-<tr class="row-even"><td><code class="code docutils literal notranslate"><span class="pre">optimizer.dualTolerance</span></code></td>
+<tr class="row-odd"><td><code class="code docutils literal notranslate"><span class="pre">optimizer.dualTolerance</span></code></td>
 <td>true</td>
 <td>N/A</td>
 <td>Tolerance criteria for dual variable change</td>
 </tr>
-<tr class="row-odd"><td><code class="code docutils literal notranslate"><span class="pre">optimizer.slackTolerance</span></code></td>
+<tr class="row-even"><td><code class="code docutils literal notranslate"><span class="pre">optimizer.slackTolerance</span></code></td>
 <td>true</td>
 <td>N/A</td>
 <td>Tolerance criteria for slack</td>
@@ -274,8 +269,8 @@
 <li><code class="code docutils literal notranslate"><span class="pre">spark.executor.cores</span></code></li>
 <li><code class="code docutils literal notranslate"><span class="pre">spark.executor.num</span></code></li>
 </ul>
-<p>The most efficient spark parameters are dependent on the problem scale and structure and there is no one-fit-all
-configurations. The default parameters usually can achieve acceptable performance, but users can definitely try tuning them if needed.</p>
+<p>The most efficient spark parameters are dependent on the problem scale and structure and there is no one-size-fits-all
+configuration. The default parameters usually can achieve acceptable performance, but users can definitely try tuning them if needed.</p>
 </div>
 </div>
 
